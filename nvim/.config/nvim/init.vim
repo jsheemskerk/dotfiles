@@ -11,6 +11,7 @@ endif
 set nocompatible
 set encoding=utf-8
 nnoremap c "_c
+nnoremap C "_C"
 " }}}
 
 " Plugins {{{
@@ -120,4 +121,5 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 "vnoremap <A-k> :m '<-2<CR>gv=gv
 " }}}
 
+set showcmd
 " vim:foldmethod=marker:foldlevel=0
