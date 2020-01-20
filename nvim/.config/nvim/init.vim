@@ -11,6 +11,14 @@ endif
 set nocompatible
 set encoding=utf-8
 nnoremap c "_c
+
+
+"maybe useless
+"set undodir=$VIM/undo
+"set backupdir=$VIM/vimtmp
+"set directory=$VIM/vimtmp
+"set history=1000
+"set undolevels=1000
 " }}}
 
 " Plugins {{{
@@ -32,7 +40,8 @@ nnoremap <space> za
 " }}}
 
 " Searching {{{
-
+set ignorecase
+set smartcase
 set incsearch
 set hlsearch
 nnoremap <leader><space> :nohlsearch<CR>
@@ -49,9 +58,8 @@ set autoindent
 " }}}
 
 " Colors {{{
-
 syntax enable
-filetype plugin on
+filetype plugin indent on
 set termguicolors
 colorscheme mysticaltutor
 "colorscheme dracula
@@ -65,8 +73,8 @@ hi Terminal ctermbg=none
 hi Terminal guibg=none
 hi Normal guibg=none
 
-autocmd BufNewFile,BufRead *.json.template set syntax=json
-
+"colorscheme srcery
+set guifont=Consolas:h12
 " }}}
 
 " UI {{{
@@ -81,7 +89,6 @@ set splitbelow splitright
 " File find {{{
 set path+=**
 set wildmenu
-set wildignore+=**/node_modules/** 
 set hidden
 " }}}
 
@@ -118,6 +125,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 "inoremap <A-k> <Esc>:m .-2<CR>==gi
 "vnoremap <A-j> :m '>+1<CR>gv=gv
 "vnoremap <A-k> :m '<-2<CR>gv=gv
+"let g:vimtex_view_general_viewer = 'mupdf'
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
