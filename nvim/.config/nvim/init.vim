@@ -73,6 +73,7 @@ autocmd BufNewFile,BufRead *.json.template set syntax=json
 set number relativenumber
 set modelines=1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 set splitbelow splitright
 " }}}}
@@ -104,8 +105,6 @@ nnoremap <A-k> :m-2<CR>==
 set backspace=2
 set ruler
 nnoremap <leader>d dd
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
