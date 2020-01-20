@@ -4,7 +4,7 @@ let mapleader = ","
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading vim-plug..."
 	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vom" > ~/.config/nvim/autoload/plug.vim
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
@@ -97,11 +97,15 @@ set clipboard+=unnamedplus
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 nnoremap S :%s//g<Left><Left>
-
 nnoremap <leader>d dd
-
 nnoremap <A-j> :m+<CR>==
 nnoremap <A-k> :m-2<CR>==
+
+set backspace=2
+set ruler
+nnoremap <leader>d dd
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
