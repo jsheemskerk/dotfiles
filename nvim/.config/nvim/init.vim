@@ -28,6 +28,7 @@ Plug 'dracula/vim', {'as':'dracula'}
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'caksoylar/vim-mysticaltutor'
 Plug 'vim-airline/vim-airline'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 " }}}
 
@@ -62,6 +63,7 @@ syntax enable
 filetype plugin indent on
 set termguicolors
 colorscheme mysticaltutor
+"colorscheme nord
 "colorscheme dracula
 
 set bg=dark
@@ -100,6 +102,8 @@ nnoremap <leader>sv :source $MYVIMRC <bar> :doautocmd BufRead<CR>
 " General{{{
 "default clipboard
 set clipboard+=unnamedplus
+vmap <leader>y !sel -i -b && xsel -b <CR>
+nmap <leader>p :r !xsel -b <CR>
 
 "don't autocomment newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
