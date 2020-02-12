@@ -1,2 +1,6 @@
 alias vim="nvim"
 alias v="nvim"
+alias r="ranger"
+alias p="sudo pacman"
+
+alias ls='ls --color=auto --group-directories-first'
