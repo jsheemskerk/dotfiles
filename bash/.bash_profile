@@ -1,7 +1,8 @@
 setxkbmap -option caps:escape
 
-export EDITOR="nvim"
 export PATH="$PATH:$HOME/.local/bin/"
+export EDITOR="nvim"
+export TERMINAL="termite"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

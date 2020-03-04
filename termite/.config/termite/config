@@ -7,6 +7,7 @@
 #clickable_url = true
 #dynamic_title = true
 font = Monaco 12
+#font = 9x15
 #font = Mononoki 13
 #fullscreen = true
 #icon_name = terminal

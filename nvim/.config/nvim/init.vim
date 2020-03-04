@@ -24,11 +24,11 @@ nnoremap C "_C"
 " Plugins {{{
 call plug#begin()
 Plug 'junegunn/vim-easy-align'
-Plug 'dracula/vim', {'as':'dracula'}
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'caksoylar/vim-mysticaltutor'
 Plug 'vim-airline/vim-airline'
-Plug 'arcticicestudio/nord-vim'
+Plug 'lervag/vimtex'
+Plug 'preservim/nerdtree'
 call plug#end()
 " }}}
 
@@ -84,7 +84,7 @@ set number relativenumber
 set modelines=1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 set splitbelow splitright
 " }}}}
 
@@ -98,6 +98,38 @@ set hidden
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC <bar> :doautocmd BufRead<CR>
 " }}}
+
+"latex {{{
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_view_general_viewer = 'mupdf'
+"set laststatus=2
+
+"}}}
+
+" nerdtree {{{
+map <leader>n :NERDTreeToggle<CR>
+
+"}}}
+
+
+" buffers {{{
+nmap <leader>t :enew <CR>
+nmap <leader>l :bnext<CR>
+nmap <C-j> :bprevious<CR>
+nmap <C-k> :bnext<CR>
+nmap <leader>; :bprevious<CR>
+nmap <leader>q :bd!<CR>
+nmap <leader>bs :ls<CR>
+
+
+nmap <Leader>w- <Plug>(golden_ratio_resize)
+" Fill screen with current window.
+nnoremap <Plug>(window-fill-screen) <C-w><Bar><C-w>_
+nmap <Leader>w+ <Plug>(window-fill-screen)
+
+
+"}}}
 
 " General{{{
 "default clipboard
@@ -118,18 +150,13 @@ set ruler
 nnoremap <leader>d dd
 
 map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
+"map <C-j> <C-w>j
+"map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " w!! = sudo write
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-"inoremap <A-j> <Esc>:m .+1<CR>==gi
-"inoremap <A-k> <Esc>:m .-2<CR>==gi
-"vnoremap <A-j> :m '>+1<CR>gv=gv
-"vnoremap <A-k> :m '<-2<CR>gv=gv
-"let g:vimtex_view_general_viewer = 'mupdf'
 " }}}
 
 set showcmd

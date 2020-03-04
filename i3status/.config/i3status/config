@@ -30,7 +30,9 @@ ethernet _first_ {
 }
 
 battery all {
+		last_full_capacity = true
         format = "%status %percentage %remaining"
+		status_chr = "⚡"
 }
 
 disk "/" {
@@ -42,7 +44,7 @@ load {
 }
 
 memory {
-        format = "%used  %available"
+        format = "used %used  avail %available"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
 }
