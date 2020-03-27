@@ -6,7 +6,8 @@
 #cell_width_scale = 1.0
 #clickable_url = true
 #dynamic_title = true
-font = Monaco 12
+font = Monaco 11
+#font = Monospace 10
 #font = 9x15
 #font = Mononoki 13
 #fullscreen = true

@@ -90,7 +90,7 @@ bindsym $mod+i exec --no-startup-id i3resize up
 bindsym $mod+o exec --no-startup-id i3resize right
 
 
-bindsym $mod+w		exec --no-startup-id brave
+bindsym $mod+w		exec brave
 
 bindsym $mod+Tab	workspace back_and_forth
 

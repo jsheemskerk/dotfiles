@@ -29,6 +29,8 @@ Plug 'caksoylar/vim-mysticaltutor'
 Plug 'vim-airline/vim-airline'
 Plug 'lervag/vimtex'
 Plug 'preservim/nerdtree'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 call plug#end()
 " }}}
 
@@ -63,6 +65,7 @@ syntax enable
 filetype plugin indent on
 set termguicolors
 colorscheme mysticaltutor
+"colorscheme slate
 "colorscheme nord
 "colorscheme dracula
 
