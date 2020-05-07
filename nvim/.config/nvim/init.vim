@@ -26,11 +26,16 @@ call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'caksoylar/vim-mysticaltutor'
+"Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'lervag/vimtex'
 Plug 'preservim/nerdtree'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+"Plug 'xolox/vim-notes'
+Plug 'vimwiki/vimwiki'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 " }}}
 
@@ -61,15 +66,18 @@ set autoindent
 " }}}
 
 " Colors {{{
+
 syntax enable
 filetype plugin indent on
 set termguicolors
 colorscheme mysticaltutor
+"colorscheme gruvbox
 "colorscheme slate
 "colorscheme nord
 "colorscheme dracula
+"let g:gruvbox_contrast_dark = 'hard'
 
-set bg=dark
+"set bg=dark
 set mouse=a
 set guioptions=a
 
@@ -78,6 +86,9 @@ hi Terminal ctermbg=none
 hi Terminal guibg=none
 hi Normal guibg=none
 
+highlight Normal ctermbg=Black
+highlight NonText ctermbg=Black
+
 "colorscheme srcery
 set guifont=Consolas:h12
 " }}}
@@ -85,6 +96,7 @@ set guifont=Consolas:h12
 " UI {{{
 set number relativenumber
 set modelines=1
+set cursorline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -112,9 +124,18 @@ let g:vimtex_view_method = 'zathura'
 
 " nerdtree {{{
 map <leader>n :NERDTreeToggle<CR>
+"autocmd VimEnter * NERDTree
 
 "}}}
 
+" stuff like auto completion {{{
+
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+
+"}}}
 
 " buffers {{{
 nmap <leader>t :enew <CR>

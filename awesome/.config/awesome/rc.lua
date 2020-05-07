@@ -21,7 +21,7 @@ local calendar = require("calendar")
 
 
 local volume_control = require("volume-control")
-volumecfg = volume_control({})
+volumecfg = volume_control({device='pulse'})
 
 
 --vnwidget = vimnotes({
@@ -40,16 +40,16 @@ end
 
 -- Handle runtime errors after startup
 do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
+	local in_error = false
+	awesome.connect_signal("debug::error", function (err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then return end
+		in_error = true
 
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
-        in_error = false
+		naughty.notify({ preset = naughty.config.presets.critical,
+		title = "Oops, an error happened!",
+		text = tostring(err) })
+		in_error = false
     end)
 end
 -- }}}
@@ -72,22 +72,22 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    -- awful.layout.suit.floating,
-    -- awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
+	awful.layout.suit.tile,
+     awful.layout.suit.floating,
+     --awful.layout.suit.tile.left,
+     --awful.layout.suit.tile.bottom,
+     --awful.layout.suit.tile.top,
+     awful.layout.suit.fair,
+     awful.layout.suit.fair.horizontal,
+     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+    awful.layout.suit.max,
+    --awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
+    --awful.layout.suit.corner.nw,
+    --awful.layout.suit.corner.ne,
+    --awful.layout.suit.corner.sw,
+    --awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -227,7 +227,7 @@ awful.screen.connect_for_each_screen(function(s)
 			--vnwidget.widget,
             --mykeyboardlayout,
             mytextclock,
-            --s.mylayoutbox,
+            s.mylayoutbox,
 			wibox.widget.systray(),
         },
     }
@@ -249,11 +249,20 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 	awful.key({}, "XF86AudioPlay",		  function() awful.spawn('playerctl play-pause') end),
+	awful.key({}, "Print",		  function() awful.spawn.with_shell('scrot ~/imgs/screenshots/%Y-%m-%d-%T-screenshot.png') end),
+	awful.key({ "Mod1"}, "Print",		  function() awful.spawn.with_shell('scrot -u ~/imgs/screenshots/%Y-%m-%d-%T-window-screenshot.png') end),
 
 	awful.key({modkey}, "F1",		  function () awful.spawn.with_shell('scherm') end),
+	awful.key({modkey}, "z",		  function () awful.spawn.with_shell('sxlock') end),
+	--awful.key({modkey}, "z",		  function () awful.spawn.with_shell('systemctl suspend') end),
+	awful.key({modkey, "Shift"}, "z", function () awful.spawn.with_shell('systemctl suspend') end),
+    awful.key({ "Mod1" }, "Tab", awful.tag.history.restore),
 
 	awful.key({modkey,			  }, "w", function()	awful.spawn('brave') end,
 			  {description="open web browser", group="applications"}),
+
+	awful.key({modkey,			  }, "e", function()	awful.spawn('nemo') end,
+			  {description="open file explorer", group="applications"}),
 	
 	awful.key({modkey, "Shift" }, "x", function () awful.spawn.with_shell('poweroff') end, 
 			  {description="shut down pc", group="applications"}),
@@ -507,6 +516,7 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
+		  "pavucontrol",
           "xtightvncviewer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -527,8 +537,8 @@ awful.rules.rules = {
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-     { rule = { class = "Brave" },
-       properties = { screen = 1, tag = "2" } },
+     --{ rule = { class = "Brave" },
+       --properties = { screen = 1, tag = "1" } },
 }
 -- }}}
 
@@ -588,9 +598,9 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+--client.connect_signal("mouse::enter", function(c)
+    --c:emit_signal("request::activate", "mouse_enter", {raise = false})
+--end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
@@ -599,6 +609,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --awful.spawn.with_shell("compton -b")
 --awful.spawn.with_shell("nitrogen --restore")
+awful.spawn("nm-applet")
 client.connect_signal("focus", function(c) c.border_color = "#660000" end)
 
 
