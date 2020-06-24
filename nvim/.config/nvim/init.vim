@@ -11,7 +11,7 @@ endif
 set nocompatible
 set encoding=utf-8
 nnoremap c "_c
-nnoremap C "_C"
+nnoremap C "_C
 
 "maybe useless
 "set undodir=$VIM/undo
@@ -165,13 +165,11 @@ nmap <leader>p :r !xsel -b <CR>
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 nnoremap S :%s//g<Left><Left>
-nnoremap <leader>d dd
 nnoremap <A-j> :m+<CR>==
 nnoremap <A-k> :m-2<CR>==
 
 set backspace=2
 set ruler
-nnoremap <leader>d dd
 
 map <C-h> <C-w>h
 "map <C-j> <C-w>j

@@ -3,6 +3,8 @@
 export PATH="$PATH:$HOME/.local/bin/"
 export EDITOR="nvim"
 export TERMINAL="termite"
+export BROWSER="brave"
+export GUI_EDITOR="gedit"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

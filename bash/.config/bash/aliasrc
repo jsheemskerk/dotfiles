@@ -7,3 +7,5 @@ alias p="sudo pacman"
 alias cfv="nvim ~/.config/nvim/init.vim"
 alias cfw="nvim ~/.config/awesome/rc.lua"
 alias vw="nvim ~/vimwiki/index.wiki"
+
+alias fuckcaps="setxkbmap -option caps:escape"
