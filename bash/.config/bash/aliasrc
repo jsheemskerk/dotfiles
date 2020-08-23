@@ -1,11 +1,24 @@
-alias ls='ls --color=auto --group-directories-first'
+# shortcuts
 alias vim="nvim"
 alias v="nvim"
 alias r="ranger"
 alias p="sudo pacman"
-
 alias cfv="nvim ~/.config/nvim/init.vim"
 alias cfw="nvim ~/.config/awesome/rc.lua"
 alias vw="nvim ~/vimwiki/index.wiki"
+alias psg="ps aux | grep "
 
 alias fuckcaps="setxkbmap -option caps:escape"
+alias scr="sudo screen /dev/ttyUSB0 115200"
+alias 1sc="xrandr --output HDMI-3 --auto --scale 1.0x1.0 --output LVDS-1 --off ; nitrogen --restore"
+alias laptop="xrandr --output LVDS-1 --auto --scale 1.0x1.0 --output HDMI-3 --off"
+
+# flags
+alias ls='ls --color=auto --group-directories-first'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+
+# errors
+alias :q=' exit'
+alias cd..='cd ..'

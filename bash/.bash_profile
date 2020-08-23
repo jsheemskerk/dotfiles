@@ -1,6 +1,6 @@
 #setxkbmap -option caps:escape
 
-export PATH="$PATH:$HOME/.local/bin/"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.emacs.d/bin"
 export EDITOR="nvim"
 export TERMINAL="termite"
 export BROWSER="brave"
@@ -8,7 +8,7 @@ export GUI_EDITOR="gedit"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-sudo loadkeys .config/keystring
+# sudo loadkeys .config/keystring
 
 if [ "$(tty)" = "/dev/tty1" ] 
 then

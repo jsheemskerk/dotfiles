@@ -7,10 +7,6 @@
 
 bind -m vi-insert "\C-l":clear-screen
 
-
-#PS1='[\u@\h \W]\$ '
-#PS1="\[\033[38;5;43m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[\033[38;5;43m\]\h\[$(tput sgr0)\]: \[$(tput sgr0)\]\[\033[38;5;28m\]\w\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
-
 PS1="\[\033[38;5;43m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;28m\]\w\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
 
 
@@ -18,8 +14,40 @@ PS1="\[\033[38;5;43m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;28m\]\w\
 [[ -f ~/.config/bash/aliasrc ]] && . ~/.config/bash/aliasrc
 
 export TERM=xterm-256color
-alias scr="sudo screen /dev/ttyUSB0 115200"
-#alias 1sc="xrandr -—output HDMI-3 —-auto -—scale 1.0x1.0 -—output LVDS-1 —-off" 
-alias 1sc="xrandr --output HDMI-3 --auto --scale 1.0x1.0 --output LVDS-1 --off ; nitrogen --restore"
-alias laptop="xrandr --output LVDS-1 --auto --scale 1.0x1.0 --output HDMI-3 --off"
+export HISTCONTROL=ignoredups:erasedups
 
+
+case ${TERM} in
+  xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+        ;;
+  screen*)
+    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+    ;;
+esac
+
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
