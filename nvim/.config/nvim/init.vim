@@ -1,11 +1,13 @@
 let mapleader = ","
 
 " basic {{{
+if has('nvim')
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading vim-plug..."
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
+endif
 endif
 
 set nocompatible
@@ -62,7 +64,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-"set expandtab "tabs become spaces
+set expandtab "tabs become spaces
 " }}}
 
 " Colors {{{
@@ -180,6 +182,8 @@ map <C-l> <C-w>l
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " }}}
+
+nnoremap <F8> :w <bar> !python % <CR>
 
 set showcmd
 " vim:foldmethod=marker:foldlevel=0
