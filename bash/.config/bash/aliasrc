@@ -3,15 +3,16 @@ alias vim="nvim"
 alias v="nvim"
 alias r="ranger"
 alias p="sudo pacman"
+alias sc="sudo systemctl "
+alias g="grep "
+alias py="python"
 alias cfv="nvim ~/.config/nvim/init.vim"
 alias cfw="nvim ~/.config/awesome/rc.lua"
-alias vw="nvim ~/vimwiki/index.wiki"
 alias psg="ps aux | grep "
+alias o="xdg-open ."
 
 alias fuckcaps="setxkbmap -option caps:escape"
-alias scr="sudo screen /dev/ttyUSB0 115200"
-alias 1sc="xrandr --output HDMI-3 --auto --scale 1.0x1.0 --output LVDS-1 --off ; nitrogen --restore"
-alias laptop="xrandr --output LVDS-1 --auto --scale 1.0x1.0 --output HDMI-3 --off"
+alias mirror="xrandr --output HDMI-0 --same-as DVI-I-1"
 
 # flags
 alias ls='ls --color=auto --group-directories-first'
@@ -22,3 +23,17 @@ alias fgrep='fgrep --colour=auto'
 # errors
 alias :q=' exit'
 alias cd..='cd ..'
+
+# git
+alias gca='git commit --amend --no-edit && git push --force-with-lease'
+alias gc="git checkout"
+alias gp="git pull --rebase"
+alias gl="git log --oneline"
+
+# git autocompletion
+if [ -f "/usr/share/bash-completion/completions/git" ]; then
+  source /usr/share/bash-completion/completions/git
+  __git_complete gc _git_checkout
+else
+  echo "Error loading git completions"
+fi
