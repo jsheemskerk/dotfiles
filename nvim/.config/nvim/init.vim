@@ -49,6 +49,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'christoomey/vim-tmux-navigator'
+" Plug 'CoderCookE/vim-chatgpt'
+Plug 'madox2/vim-ai'
 call plug#end()
 " }}}
 
@@ -190,6 +192,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 nnoremap c "_c
 nnoremap C "_C
+nnoremap x "_x
 nnoremap Y yg_
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -250,16 +253,17 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>r <Plug>(coc-rename)
 
-nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>cr <Plug>(coc-rename)
 
-xmap <leader>e  <Plug>(coc-format-selected)
-nmap <leader>e  <Plug>(coc-format-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
+
+xmap <leader>ce  <Plug>(coc-format-selected)
+nmap <leader>ce  <Plug>(coc-format-selected)
 
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
@@ -293,19 +297,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   elseif (coc#rpc#ready())
-"     call CocActionAsync('doHover')
-"   else
-"     execute '!' . &keywordprg . " " . expand('<cword>')
-"   endif
-" endfunction
-
-
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -315,20 +306,33 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-
-" if has('nvim-0.4.0') || has('patch-8.2.0750')
-"   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-" endif
-
 command! -nargs=0 Format :call CocActionAsync('format')
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " }}}
+
+" AI {{{
+
+nnoremap <leader>aa :AI<CR>
+xnoremap <leader>aa :AI<CR>
+
+" edit text with a custom prompt
+" xnoremap <leader>as :AIEdit fix grammar and spelling<CR>
+" nnoremap <leader>as :AIEdit fix grammar and spelling<CR>
+
+" trigger chat
+xnoremap <leader>as :AIChat<CR>
+nnoremap <leader>as :AIChat<CR>
+
+" redo last AI command
+nnoremap <leader>ar :AIRedo<CR>
+
+
+" }}}
+
 
 nnoremap <leader>f :GFiles<CR>
 
@@ -337,7 +341,7 @@ tnoremap <esc> <C-\><C-N><CR>
 "let g:rustfmt_autosave = 1
 
 " map <f8> :Cargo build<CR>
-" map <f9> :Cargo run<CR>
+map <f9> :Cargo run<CR>
 
 map <f5> :!python %<CR>
 
